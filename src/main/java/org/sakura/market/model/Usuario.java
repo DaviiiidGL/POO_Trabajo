@@ -8,9 +8,9 @@ public abstract class Usuario {
     protected String email;
     protected String password;
     protected LocalDate fechaRegistro;
-    protected String estadoCuenta;
+    protected EstadoCuenta estadoCuenta;
 
-    public Usuario(Long id, String nombre, String email, String password, LocalDate fechaRegistro, String estadoCuenta) {
+    public Usuario(Long id, String nombre, String email, String password, LocalDate fechaRegistro, EstadoCuenta estadoCuenta) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -36,8 +36,8 @@ public abstract class Usuario {
 
     public LocalDate getFechaRegistro() {return fechaRegistro;}
 
-    public String getEstadoCuenta() {return estadoCuenta;}
-    public void setEstadoCuenta(String estadoCuenta) {this.estadoCuenta = estadoCuenta;}
+    public EstadoCuenta getEstadoCuenta() {return estadoCuenta;}
+    public void setEstadoCuenta(EstadoCuenta estadoCuenta) {this.estadoCuenta = estadoCuenta;}
 
     @Override
     public String toString() {
