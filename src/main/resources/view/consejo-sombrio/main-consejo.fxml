@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.sakura.market.controller.Consejo.MainConsejoController"
+            style="-fx-background-color: #1a1a1a;">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-padding: 15; -fx-background-color: #2d2d2d; -fx-border-color: #FFB3C1; -fx-border-width: 0 0 2 0;">
+
+            <Label text="🌑 Consejo Sombrío - Glow Up"
+                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 24; -fx-font-weight: bold;"/>
+
+            <Label text="Panel de Control"
+                   style="-fx-text-fill: #FFF5E1; -fx-font-size: 16;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="lblUsuario" text="Consejo Sombrío"
+                   style="-fx-text-fill: #FFF5E1; -fx-font-size: 14; -fx-font-weight: bold;"/>
+
+            <Button fx:id="btnCerrarSesion" text="Cerrar Sesion"
+                    onAction="#handleCerrarSesion"
+                    style="-fx-background-color: #3a3a3a; -fx-text-fill: #FFB3C1; -fx-padding: 8 16; -fx-background-radius: 6; -fx-border-color: #FFB3C1; -fx-border-width: 1; -fx-border-radius: 6; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+            <VBox spacing="30" style="-fx-padding: 30 30 20 30; -fx-background-color: #1a1a1a;">
+
+                <!-- BIENVENIDA -->
+                <VBox spacing="10">
+                    <Label text="Bienvenido, Miembro Sombrío"
+                           style="-fx-text-fill: #FFB3C1; -fx-font-size: 28; -fx-font-weight: bold;"/>
+                </VBox>
+
+                <!-- MÉTRICAS PRINCIPALES (SIN VENTAS) -->
+                <VBox spacing="15">
+                    <Label text="Datos del Sistema"
+                           style="-fx-text-fill: #FFB3C1; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="20">
+
+                        <!-- Productos -->
+                        <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 35; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12;">
+                            <Label text="📦" style="-fx-font-size: 56;"/>
+                            <Label text="Productos"
+                                   style="-fx-text-fill: #FFF5E1; -fx-font-size: 15; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblProductos" text="156"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 28; -fx-font-weight: bold;"/>
+                            <Label text="En catalogo" style="-fx-text-fill: #b8b8b8; -fx-font-size: 13;"/>
+                        </VBox>
+
+                        <!-- Pedidos -->
+                        <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 35; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12;">
+                            <Label text="📋" style="-fx-font-size: 56;"/>
+                            <Label text="Pedidos"
+                                   style="-fx-text-fill: #FFF5E1; -fx-font-size: 15; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblPedidos" text="48"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 28; -fx-font-weight: bold;"/>
+                            <Label text="En proceso" style="-fx-text-fill: #b8b8b8; -fx-font-size: 13;"/>
+                        </VBox>
+
+                        <!-- Usuarios -->
+                        <VBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 35; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12;">
+                            <Label text="👥" style="-fx-font-size: 56;"/>
+                            <Label text="Usuarios"
+                                   style="-fx-text-fill: #FFF5E1; -fx-font-size: 15; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblUsuarios" text="350"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 28; -fx-font-weight: bold;"/>
+                            <Label text="Registrados" style="-fx-text-fill: #b8b8b8; -fx-font-size: 13;"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- SECCIÓN: GESTIÓN DE CONTENIDO -->
+                <VBox spacing="15">
+                    <Label text="Gestion de Contenido"
+                           style="-fx-text-fill: #FFB3C1; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="20">
+
+                        <!-- Productos -->
+                        <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS"
+                              onMouseClicked="#handleGestionProductos"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 30; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12; -fx-cursor: hand;">
+                            <Label text="📦" style="-fx-font-size: 48;"/>
+                            <Label text="Productos"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                            <Label text="CRUD de productos y categorías"
+                                   wrapText="true"
+                                   textAlignment="CENTER"
+                                   style="-fx-text-fill: #b8b8b8; -fx-font-size: 12; -fx-text-alignment: center;"/>
+                        </VBox>
+
+                        <!-- Pedidos -->
+                        <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS"
+                              onMouseClicked="#handleGestionPedidos"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 30; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12; -fx-cursor: hand;">
+                            <Label text="📋" style="-fx-font-size: 48;"/>
+                            <Label text="Pedidos"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                            <Label text="Gestión de pedidos y estado"
+                                   wrapText="true"
+                                   textAlignment="CENTER"
+                                   style="-fx-text-fill: #b8b8b8; -fx-font-size: 12; -fx-text-alignment: center;"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+                <!-- SECCIÓN: GESTIÓN DE CUENTAS -->
+                <VBox spacing="15">
+                    <Label text="Gestion de Cuentas"
+                           style="-fx-text-fill: #FFB3C1; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="20">
+
+                        <!-- Clientes -->
+                        <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS"
+                              onMouseClicked="#handleGestionClientes"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 30; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12; -fx-cursor: hand;">
+                            <Label text="👤" style="-fx-font-size: 48;"/>
+                            <Label text="Clientes"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                            <Label text="Gestión de cuentas de clientes"
+                                   wrapText="true"
+                                   textAlignment="CENTER"
+                                   style="-fx-text-fill: #b8b8b8; -fx-font-size: 12; -fx-text-alignment: center;"/>
+                        </VBox>
+
+                        <!-- Administradores (SOLO LECTURA) -->
+                        <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS"
+                              onMouseClicked="#handleVerAdministradores"
+                              style="-fx-background-color: #2d2d2d; -fx-padding: 30; -fx-background-radius: 12; -fx-border-color: #FFB3C1; -fx-border-width: 2; -fx-border-radius: 12; -fx-cursor: hand;">
+                            <Label text="👁️" style="-fx-font-size: 48;"/>
+                            <Label text="Administradores"
+                                   style="-fx-text-fill: #FFB3C1; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                            <Label text="Ver admins"
+                                   wrapText="true"
+                                   textAlignment="CENTER"
+                                   style="-fx-text-fill: #b8b8b8; -fx-font-size: 12; -fx-text-alignment: center;"/>
+                        </VBox>
+
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- FOOTER CON EASTER EGG -->
+    <bottom>
+        <HBox alignment="CENTER"
+              onMouseClicked="#handleClicBajo"
+              style="-fx-padding: 15; -fx-background-color: #2d2d2d; -fx-border-color: #FFB3C1; -fx-border-width: 2 0 0 0; -fx-cursor: hand;">
+            <Label text="© 2025 Sakura Market - Owned by Sakura (NO HACER CLIC AQUÍ)"
+                   style="-fx-text-fill: #b8b8b8; -fx-font-size: 12;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
