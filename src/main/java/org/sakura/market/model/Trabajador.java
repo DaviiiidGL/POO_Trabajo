@@ -17,4 +17,23 @@ public class Trabajador {
         this.edad = edad;
         this.condicionSalud = condicionSalud;
     }
+
+    public void actualizarSalud(String nuevaCondicion) {
+        this.condicionSalud = nuevaCondicion;
+        System.out.println("Condición de salud actualizada a: " + nuevaCondicion);
+    }
+
+    public void registrarLlegada(LocalDate nuevaFecha) {
+        this.fechaLlegada = nuevaFecha;
+        System.out.println("Fecha de llegada registrada: " + nuevaFecha);
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Trabajador de " + PaisOrigen + ", edad " + edad + ", condición: " + condicionSalud);
+    }
+
+    public void cumplirAnios() {
+        this.edad++;
+        System.out.println("El trabajador ha cumplido años. Nueva edad: " + edad);
+    }
 }

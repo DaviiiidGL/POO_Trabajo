@@ -23,6 +23,19 @@ public abstract class Usuario {
 
     public abstract void cambiarPass(String newPass);
 
+    public void cerrarSesion() {
+        System.out.println(nombre + " ha cerrado sesión.");
+    }
+
+    public void actualizarEstadoCuenta(EstadoCuenta nuevoEstado) {
+        this.estadoCuenta = nuevoEstado;
+        System.out.println("El estado de la cuenta de " + nombre + " se actualizó a: " + nuevoEstado);
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Usuario: " + nombre + " | Email: " + email + " | Estado: " + estadoCuenta);
+    }
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 

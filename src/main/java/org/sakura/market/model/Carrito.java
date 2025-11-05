@@ -11,7 +11,7 @@ public class Carrito {
     private LocalDate fechaCreacion;
     private List<LineaCarrito> lineasCarrito;
 
-    public Carrito(){
+    public Carrito() {
         this.id = UUID.randomUUID();
         this.fechaCreacion = LocalDate.now();
         this.lineasCarrito = new ArrayList<LineaCarrito>();
@@ -19,61 +19,121 @@ public class Carrito {
 
     // GETTERS Y SETTERS
 
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public List<LineaCarrito> getLineasCarrito() {
+        return lineasCarrito;
+    }
+
     // PRODUCTOS
-    public void agregarProducto(Producto producto, int cantidad){
-        // Deberia añadir un producto al carrito
+    public void agregarProducto(Producto producto, int cantidad) {
+        if (!validarStock(producto, cantidad)) {
+            System.out.println("No hay suficiente stock para el producto: " + producto.getNombre());
+            return;
+        }
+
+        LineaCarrito existente = buscarProductoCarrito(producto);
+        if (existente != null) {
+            actualizarCantidad(producto, existente.getCantidad() + cantidad);
+            System.out.println("Cantidad actualizada para el producto: " + producto.getNombre());
+        } else {
+            LineaCarrito nuevaLinea = new LineaCarrito(producto, cantidad);
+            lineasCarrito.add(nuevaLinea);
+            System.out.println("Producto agregado al carrito: " + producto.getNombre());
+        }
     }
 
-    public void eliminarProducto(Producto producto){
-        // Deberia eliminar un producto del carrito
+    public void eliminarProducto(Producto producto) {
+        LineaCarrito linea = buscarProductoCarrito(producto);
+        if (linea != null) {
+            lineasCarrito.remove(linea);
+            System.out.println("Producto eliminado del carrito: " + producto.getNombre());
+        } else {
+            System.out.println("El producto no se encontró en el carrito: " + producto.getNombre());
+        }
     }
 
-    public void actualizarCantidad(Producto producto, int cantidad){
-        // Un producto existente se le cambia la cantidad
+    public void actualizarCantidad(Producto producto, int cantidad) {
+        LineaCarrito linea = buscarProductoCarrito(producto);
+        if (linea != null) {
+            lineasCarrito.remove(linea);
+            lineasCarrito.add(new LineaCarrito(producto, cantidad));
+            System.out.println("Cantidad actualizada para " + producto.getNombre() + ": " + cantidad);
+        } else {
+            System.out.println("No se encontró el producto en el carrito para actualizar.");
+        }
     }
 
-    public void vaciarCarrito(){
+    public void vaciarCarrito() {
         lineasCarrito.clear();
+        System.out.println("Carrito vaciado correctamente.");
     }
 
     // CONSULTAS
 
-    public LineaCarrito buscarProductoCarrito(Producto producto){
-        // Deberia de devolver la linea en la que se encuentra el producto
-
+    public LineaCarrito buscarProductoCarrito(Producto producto) {
+        for (LineaCarrito linea : lineasCarrito) {
+            if (linea.getProducto().equals(producto)) {
+                return linea;
+            }
+        }
         return null;
     }
 
-    public boolean contieneProducto(Producto producto){
-        // Devuelve si un producto ya se encuentra dentro del carrito
-        return true;
+    public boolean contieneProducto(Producto producto) {
+        return buscarProductoCarrito(producto) != null;
     }
 
-    public int cantidadProductosTotal(){
-        // Devuelve cantidad total de productos en el carrito
-        return 0;
+    public int cantidadProductosTotal() {
+        int total = 0;
+        for (LineaCarrito linea : lineasCarrito) {
+            total += linea.getCantidad();
+        }
+        System.out.println("Cantidad total de productos en el carrito: " + total);
+        return total;
     }
 
     // CALCULOS
 
-    public BigDecimal calcularTotal(){
-        // Devuelve valor total de la compra
+    public BigDecimal calcularTotal() {
         BigDecimal total = BigDecimal.ZERO;
+        for (LineaCarrito linea : lineasCarrito) {
+            total = total.add(linea.getSubtotal());
+        }
+        System.out.println("Total del carrito: $" + total);
         return total;
     }
 
-    public BigDecimal calcularSubtotal(Producto producto){
-        // Devuelve el valor total del producto dado
-        return BigDecimal.ONE;
+    public BigDecimal calcularSubtotal(Producto producto) {
+        LineaCarrito linea = buscarProductoCarrito(producto);
+        if (linea != null) {
+            System.out.println("Subtotal del producto " + producto.getNombre() + ": $" + linea.getSubtotal());
+            return linea.getSubtotal();
+        } else {
+            System.out.println("El producto no está en el carrito.");
+            return BigDecimal.ZERO;
+        }
     }
 
     // VALIDACIONES
 
-    public boolean estaVacio(){
-        return lineasCarrito.isEmpty();
+    public boolean estaVacio() {
+        boolean vacio = lineasCarrito.isEmpty();
+        System.out.println(vacio ? "El carrito está vacío." : "El carrito tiene productos.");
+        return vacio;
     }
 
-    public boolean validarStock(Producto producto, int cantidad){
-        return producto.getStock() >= cantidad;
+    public boolean validarStock(Producto producto, int cantidad) {
+        boolean valido = producto.getStock() >= cantidad;
+        if (!valido) {
+            System.out.println("Stock insuficiente para el producto: " + producto.getNombre());
+        }
+        return valido;
     }
 }
